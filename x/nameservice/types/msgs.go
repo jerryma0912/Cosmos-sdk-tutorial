@@ -1,4 +1,5 @@
 package types
+
 //构建允许用户购买域名和设置解析值的Msg
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -49,7 +50,7 @@ type MsgSetName struct {
 func NewMsgSetName(name string, value string, owner sdk.AccAddress) MsgSetName {
 	return MsgSetName{
 		// 所要设置的域名
-		Name:  name,
+		Name: name,
 		//要设置的域名解析值
 		Value: value,
 		//域名的所有者
@@ -87,7 +88,6 @@ func (msg MsgSetName) GetSignBytes() []byte {
 	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
 }
 
-
 // GetSigners定义一个Tx上需要哪些人的签名才能使其有效。
 // 在这种情形下，MsgSetName要求域名所有者在尝试重置域名解析值时要对该交易签名。
 // GetSigners defines whose signature is required
@@ -102,6 +102,7 @@ type MsgBuyName struct {
 	Buyer sdk.AccAddress `json:"buyer"`
 }
 
+// 定义购买域名的Msg
 // NewMsgBuyName is the constructor function for MsgBuyName
 func NewMsgBuyName(name string, bid sdk.Coins, buyer sdk.AccAddress) MsgBuyName {
 	return MsgBuyName{

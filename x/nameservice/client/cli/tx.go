@@ -1,5 +1,6 @@
 package cli
 
+// 在tx.go中定义交易生成
 import (
 	"github.com/spf13/cobra"
 
