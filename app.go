@@ -6,15 +6,15 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 	cmn "github.com/tendermint/tendermint/libs/common"
-	dbm "github.com/tendermint/tendermint/libs/db"
-	"github.com/tendermint/tendermint/libs/log"
+	dbm "github.com/tendermint/tendermint/libs/db"	//tendermint的数据库代码
+	"github.com/tendermint/tendermint/libs/log"		//tendermint日志
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	bam "github.com/cosmos/cosmos-sdk/baseapp"
+	bam "github.com/cosmos/cosmos-sdk/baseapp"		//Cosmos SDK提供的ABCI模板
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/auth"			//cosmos sdk的auth模块
 	"github.com/cosmos/cosmos-sdk/x/auth/genaccounts"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	distr "github.com/cosmos/cosmos-sdk/x/distribution"
@@ -57,8 +57,9 @@ func MakeCodec() *codec.Codec {
 	return cdc
 }
 
+//为应用程序创建一个新的自定义类型
 type nameServiceApp struct {
-	*bam.BaseApp
+	*bam.BaseApp	//这个类型将嵌入baseapp,类似于继承
 	cdc *codec.Codec
 
 	// Keys to access the substores
@@ -89,6 +90,7 @@ type nameServiceApp struct {
 }
 
 // NewNameServiceApp is a constructor function for nameServiceApp
+//为应用添加一个简单的构造函数
 func NewNameServiceApp(logger log.Logger, db dbm.DB) *nameServiceApp {
 
 	// First define the top level codec that will be shared by the different modules
