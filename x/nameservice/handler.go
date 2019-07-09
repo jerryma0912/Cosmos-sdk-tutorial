@@ -4,6 +4,7 @@ package nameservice
 //在此模块中，你有两种类型的Msg，用户可以发送这些Msg来和应用程序状态进行交互：
 // SetName和BuyName。它们各自同其Handler关联。
 // test
+
 import (
 	"fmt"
 
