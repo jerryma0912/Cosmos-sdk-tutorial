@@ -6,15 +6,15 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 	cmn "github.com/tendermint/tendermint/libs/common"
-	dbm "github.com/tendermint/tendermint/libs/db"	//tendermint的数据库代码
-	"github.com/tendermint/tendermint/libs/log"		//tendermint日志
+	dbm "github.com/tendermint/tendermint/libs/db" //tendermint的数据库代码
+	"github.com/tendermint/tendermint/libs/log"    //tendermint日志
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	bam "github.com/cosmos/cosmos-sdk/baseapp"		//Cosmos SDK提供的ABCI模板
+	bam "github.com/cosmos/cosmos-sdk/baseapp" //Cosmos SDK提供的ABCI模板
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/cosmos/cosmos-sdk/x/auth"			//cosmos sdk的auth模块
+	"github.com/cosmos/cosmos-sdk/x/auth" //cosmos sdk的auth模块
 	"github.com/cosmos/cosmos-sdk/x/auth/genaccounts"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	distr "github.com/cosmos/cosmos-sdk/x/distribution"
@@ -22,7 +22,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/params"
 	"github.com/cosmos/cosmos-sdk/x/slashing"
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	"github.com/cosmos/sdk-application-tutorial/x/nameservice"
+	"github.com/jerryma0912/Cosmos-sdk-tutorial/x/nameservice"
 )
 
 const appName = "nameservice"
@@ -59,8 +59,8 @@ func MakeCodec() *codec.Codec {
 
 //为应用程序创建一个新的自定义类型
 type nameServiceApp struct {
-	*bam.BaseApp	//这个类型将嵌入baseapp,类似于继承
-	cdc *codec.Codec
+	*bam.BaseApp //这个类型将嵌入baseapp,类似于继承
+	cdc          *codec.Codec
 
 	// Keys to access the substores
 	keyMain          *sdk.KVStoreKey

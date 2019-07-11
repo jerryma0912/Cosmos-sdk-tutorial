@@ -7,7 +7,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/sdk-application-tutorial/x/nameservice/types"
+	"github.com/jerryma0912/Cosmos-sdk-tutorial/x/nameservice/types"
 	"github.com/spf13/cobra"
 )
 

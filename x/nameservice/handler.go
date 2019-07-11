@@ -6,7 +6,7 @@ package nameservice
 // test
 import (
 	"fmt"
-	"github.com/cosmos/sdk-application-tutorial/x/nameservice/types"
+	"github.com/jerryma0912/Cosmos-sdk-tutorial/x/nameservice/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

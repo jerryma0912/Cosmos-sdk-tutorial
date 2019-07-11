@@ -1,4 +1,4 @@
-module github.com/cosmos/sdk-application-tutorial
+module github.com/jerryma0912/Cosmos-sdk-tutorial
 
 go 1.12
 
