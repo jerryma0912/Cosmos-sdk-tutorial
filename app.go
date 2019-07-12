@@ -58,6 +58,7 @@ func MakeCodec() *codec.Codec {
 }
 
 //为应用程序创建一个新的自定义类型
+// 需要在`nameServiceApp`结构体中添加存储的key和`Keepers`，并更新构造函数
 type nameServiceApp struct {
 	*bam.BaseApp //这个类型将嵌入baseapp,类似于继承
 	cdc          *codec.Codec
@@ -91,6 +92,13 @@ type nameServiceApp struct {
 
 // NewNameServiceApp is a constructor function for nameServiceApp
 //为应用添加一个简单的构造函数
+// 添加以下逻辑：
+//- 从每个所需模块中实例化所需的`Keeper`。
+//- 生成每个`Keeper`所需的`storeKey`。
+//- 注册每个模块的`handler`。`baseapp`的`路由器`的 `AddRoute()` 方法用来做这个。
+//- 注册每个模块的`querier`。`baseapp`的`queryRouter`中的`AddRoute()`方法用来做这个。
+//- 将`KVStores`挂载到`baseApp`的multistore提供的key值。
+//- 设置`initChainer`来定义初始应用程序状态。
 func NewNameServiceApp(logger log.Logger, db dbm.DB) *nameServiceApp {
 
 	// First define the top level codec that will be shared by the different modules

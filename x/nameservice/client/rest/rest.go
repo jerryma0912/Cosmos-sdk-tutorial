@@ -22,6 +22,7 @@ const (
 	restName = "name"
 )
 
+//首先在`RegisterRoutes`函数中为模块定义REST客户端接口。路由都以模块名称开头，以防止命名空间与其他模块的路径冲突：
 // RegisterRoutes - Central function to define routes that get registered by the main application
 func RegisterRoutes(cliCtx context.CLIContext, r *mux.Router, storeName string) {
 	r.HandleFunc(fmt.Sprintf("/%s/names", storeName), namesHandler(cliCtx, storeName)).Methods("GET")
@@ -33,7 +34,16 @@ func RegisterRoutes(cliCtx context.CLIContext, r *mux.Router, storeName string) 
 
 // --------------------------------------------------------------------------------------
 // Tx Handler
+//现在定义 buyName 和 setName 交易路由。
+// 请注意，这些实际上并不能将交易发送进行买入和设置名称。
+// 这需要跟交易请求一起发送发送密码，将是一个安全问题。
+// 相反，这些端点构建并返回每个特定交易，然后可以以安全的方式对其进行签名，
+// 然后使用标准端点（如/ txs）将其广播到网络。
 
+//- [`BaseReq`](https://godoc.org/github.com/cosmos/cosmos-sdk/client/utils#BaseReq)
+// 包含用于进行交易的基本必填字段（使用哪个密钥，如何解码，使用哪条链等等）并且如所示被设计成嵌入形式。
+//- `baseReq.ValidateBasic`和`utils.CompleteAndBroadcastTxREST`为你设置响应代码，
+// 因此你需担心在使用这些函数时处理错误或成功。
 type buyNameReq struct {
 	BaseReq rest.BaseReq `json:"base_req"`
 	Name    string       `json:"name"`
@@ -119,7 +129,10 @@ func setNameHandler(cliCtx context.CLIContext) http.HandlerFunc {
 
 //--------------------------------------------------------------------------------------
 // Query Handlers
-
+//
+//接下来，是时候定义上面提到的处理程序了。
+//- 请注意，我们使用相同的`cliCtx.QueryWithData`函数来获取数据
+//- 这些函数与相应的CLI功能几乎相同
 func resolveNameHandler(cliCtx context.CLIContext, storeName string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
