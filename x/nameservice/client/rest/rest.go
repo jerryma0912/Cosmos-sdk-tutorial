@@ -1,5 +1,9 @@
 package rest
 
+// 你的模块还可以公开 REST 接口，
+// 提供程序访问模块的功能。。首先创建一个文件来保存HTTP的handler：
+// ./x/nameservice/client/rest/rest.go
+
 import (
 	"fmt"
 	"net/http"

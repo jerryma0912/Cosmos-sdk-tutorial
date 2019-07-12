@@ -9,7 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
+	"github.com/cosmos/cosmos-sdk/x/auth/client/utils" //它提供对CLI控制的帐户的访问权限
 	"github.com/jerryma0912/Cosmos-sdk-tutorial/x/nameservice/types"
 )
 
