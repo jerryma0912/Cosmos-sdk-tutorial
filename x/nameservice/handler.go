@@ -9,6 +9,7 @@ import (
 	"github.com/jerryma0912/Cosmos-sdk-tutorial/x/nameservice/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
+
 )
 
 // NewHandler本质上是一个子路由，它将进入该模块的msg路由到正确的handler做处理。
