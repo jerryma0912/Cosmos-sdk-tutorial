@@ -25,15 +25,34 @@ import (
 	"github.com/jerryma0912/Cosmos-sdk-tutorial/x/nameservice"
 )
 
+// baseapp的作用：
+// 1. 解析从共识层发来的交易
+// Decode transactions received from the Tendermint consensus engine.
+// 2. 提取信息 & 做完备性校验
+// Extract messages from transactions and do basic sanity checks.
+// 3. 路由消息到指定模块
+// Route the message to the appropriate module so that it can be processed.
+// 4. 如果ABCI的消息为DeliverTx，则提交
+// Commit if the ABCI message is DeliverTx
+// 5. 设置Beginblock 以及 Endblock，用于定义逻辑上的开始与结束时，起始块与终止块
+// Help set up Beginblock and Endblock, two messages that enable you to define logic executed at the beginning and end of each block.
+// 6. 初始化状态机
+// Help initialise your state.
+// 7. 设置请求
+// Help set up queries.
+
 const appName = "nameservice"
 
 var (
+	//设置客户端的安装路径
 	// default home directories for the application CLI
 	DefaultCLIHome = os.ExpandEnv("$HOME/.nscli")
 
+	//设置全节点的安装路径
 	// DefaultNodeHome sets the folder where the applcation data and configuration will be stored
 	DefaultNodeHome = os.ExpandEnv("$HOME/.nsd")
 
+	//为不同模块的初始化 以及 配置，使其能够成为一个完整的应用
 	// ModuleBasicManager is in charge of setting up basic module elemnets
 	ModuleBasics = module.NewBasicManager(
 		genaccounts.AppModuleBasic{},
@@ -57,7 +76,7 @@ func MakeCodec() *codec.Codec {
 	return cdc
 }
 
-//为应用程序创建一个新的自定义类型
+// 为应用程序创建一个新的自定义类型
 // 需要在`nameServiceApp`结构体中添加存储的key和`Keepers`，并更新构造函数
 type nameServiceApp struct {
 	*bam.BaseApp //这个类型将嵌入baseapp,类似于继承
